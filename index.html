@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="icon"><ion-icon name="logo-apple"></ion-icon></span>
+              <span class="title">SayurKu</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="icon"
+                ><ion-icon name="home-outline"></ion-icon
+              ></span>
+              <span class="title">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <div class="topbar">
+    <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+    </div>
+
+    <div class="search">
+        <label>
+            <input type="text" placeholder="Cari pesanan disini...">
+            <ion-icon name="search-outline"></ion-icon>
+        </label>
+    </div>
+
+    <div class="user-area">
+        <div class="notification">
+            <ion-icon name="notifications-outline"></ion-icon>
+            <span class="badge">3</span> </div>
+        <div class="user">
+            <img src="img/Pas Foto Naofal.jpg" alt="Profile">
+        </div>
+    </div>
+</div>
+
+<div class="cardBox">
+    <div class="card">
+        <div>
+            <div class="numbers">1,504</div>
+            <div class="cardName">Daily Views</div>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="eye-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">80</div>
+            <div class="cardName">Sales</div>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="cart-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">284</div>
+            <div class="cardName">Comments</div>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="chatbubbles-outline"></ion-icon>
+        </div>
+    </div>
+
+<div class="card">
+    <div>
+        <div class="numbers">Rp 124jt</div> 
+        <div class="cardName">Pemasukan</div>
+    </div>
+    <div class="iconBx">
+        <ion-icon name="cash-outline"></ion-icon>
+    </div>
+</div>
+</div>
+
+        <div class="details">
+          <div class="recentOrders">
+            <div class="cardHeader">
+              <h2>Recent Orders</h2>
+              <a href="#" class="btn">View All</a>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Price</td>
+                  <td>Payment</td>
+                  <td>Status</td>
+                </tr>
+              </thead>
+<tbody>
+    <tr>
+        <td>Paket Sayur Asem</td>
+        <td>Rp 25.000</td>
+        <td>Lunas</td>
+        <td><span class="status delivered">Terkirim</span></td>
+    </tr>
+    <tr>
+        <td>Alpukat Mentega (1kg)</td>
+        <td>Rp 45.000</td>
+        <td>Belum</td>
+        <td><span class="status pending">Proses</span></td>
+    </tr>
+    <tr>
+        <td>Melon Hidroponik</td>
+        <td>Rp 65.000</td>
+        <td>Batal</td>
+        <td><span class="status return">Retur</span></td>
+    </tr>
+    <tr>
+        <td>Beras Merah Organik</td>
+        <td>Rp 90.000</td>
+        <td>Lunas</td>
+        <td><span class="status inprogress">Dikemas</span></td>
+    </tr>
+    <tr>
+        <td>Wagyu Slice (500g)</td>
+        <td>Rp 180.000</td>
+        <td>Lunas</td>
+        <td><span class="status delivered">Terkirim</span></td>
+    </tr>
+    <tr>
+        <td>Tomat Ceri</td>
+        <td>Rp 15.000</td>
+        <td>Belum</td>
+        <td><span class="status pending">Proses</span></td>
+    </tr>
+    <tr>
+        <td>Jamur Enoki</td>
+        <td>Rp 8.000</td>
+        <td>Lunas</td>
+        <td><span class="status delivered">Terkirim</span></td>
+    </tr>
+    <tr>
+        <td>Salad Dressing</td>
+        <td>Rp 35.000</td>
+        <td>Batal</td>
+        <td><span class="status return">Retur</span></td>
+    </tr>
+</tbody>
+            </table>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <div class="recentCustomers">
+              <div class="cardHeader">
+                <h2>Earning Source</h2>
+              </div>
+
+              <div class="chartBox">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
