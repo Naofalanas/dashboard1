@@ -1,73 +1,83 @@
-// Tunggu HTML siap dulu baru jalanin script
 document.addEventListener("DOMContentLoaded", function () {
-  // --- 1. SIDEBAR TOGGLE & ACTIVE STATE ---
-  let list = document.querySelectorAll(".navigation li");
+  console.log("Website siap! Script mulai jalan...");
 
-  function activeLink() {
-    list.forEach((item) => {
-      item.classList.remove("hovered");
-    });
-    this.classList.add("hovered");
-  }
+  // --- 1. FUNGSI SIDEBAR (TOGGLE) ---
+  const toggle = document.querySelector(".toggle");
+  const navigation = document.querySelector(".navigation");
+  const main = document.querySelector(".main");
 
-  list.forEach((item) => item.addEventListener("click", activeLink));
-
-  // Toggle Menu
-  let toggle = document.querySelector(".toggle");
-  let navigation = document.querySelector(".navigation");
-  let main = document.querySelector(".main");
-
+  // Cek dulu tombolnya ada gak, biar gak error
   if (toggle) {
     toggle.onclick = function () {
+      console.log("Tombol menu diklik!"); // Cek di Console (F12) kalau penasaran
       navigation.classList.toggle("active");
       main.classList.toggle("active");
     };
+  } else {
+    console.error("Tombol .toggle gak ketemu di HTML!");
   }
 
-  // --- 2. CHART CONFIGURATION (DOUGHNUT) ---
-  // Cek apakah elemen canvas ada biar gak error
-  const chartCanvas = document.getElementById("myChart");
+  // --- 2. FUNGSI MENU AKTIF (HOVER EFFECT) ---
+  const list = document.querySelectorAll(".navigation li");
+  function activeLink() {
+    list.forEach((item) => item.classList.remove("hovered"));
+    this.classList.add("hovered");
+  }
+  list.forEach((item) => item.addEventListener("click", activeLink));
 
+  // --- 3. FUNGSI SEARCH (PENCARIAN TABEL) ---
+  const searchInput = document.querySelector(".search input");
+  const tableRows = document.querySelectorAll(".details table tbody tr");
+
+  if (searchInput) {
+    searchInput.addEventListener("keyup", function (e) {
+      const term = e.target.value.toLowerCase();
+      tableRows.forEach((row) => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(term) ? "" : "none";
+      });
+    });
+  }
+
+  // --- 4. GRAFIK DONAT (CHART.JS) ---
+  const chartCanvas = document.getElementById("myChart");
   if (chartCanvas) {
     const ctx = chartCanvas.getContext("2d");
 
-    // Hapus chart lama kalau ada (biar gak numpuk/bug)
+    // Hapus chart lama kalau ada (biar gak numpuk)
     if (window.myDashboardChart) {
       window.myDashboardChart.destroy();
     }
 
     window.myDashboardChart = new Chart(ctx, {
-      type: "doughnut",
+      type: "doughnut", // Tipe Donat
       data: {
-        labels: ["Organik", "Hidroponik", "Lokal", "Impor"], // Label Sayur
+        labels: ["Organik", "Hidroponik", "Lokal", "Impor"], // Label di bawah
         datasets: [
           {
-            label: "Sumber Penjualan",
-            data: [1500, 1200, 3500, 500],
+            label: "Penjualan",
+            data: [1500, 1200, 3500, 500], // Angka Data
             backgroundColor: [
-              "#8de02c", // Hijau Segar
-              "#6366f1", // Indigo
-              "#e9b10a", // Kuning
-              "#f00", // Merah
+              "#8de02c", // Hijau (Organik)
+              "#6366f1", // Indigo (Hidroponik)
+              "#e9b10a", // Kuning (Lokal)
+              "#ef4444", // Merah (Impor)
             ],
             borderWidth: 0,
-            hoverOffset: 4,
+            hoverOffset: 10,
           },
         ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, // Biar ngikutin ukuran kotak
-        cutout: "75%", // Lubang tengah
+        maintainAspectRatio: false,
+        cutout: "75%", // Bikin bolong tengah
         plugins: {
           legend: {
             position: "bottom",
             labels: {
               usePointStyle: true,
-              padding: 20,
-              font: {
-                size: 12,
-              },
+              font: { family: "'Poppins', sans-serif", size: 12 },
             },
           },
         },
