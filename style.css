@@ -452,6 +452,22 @@ body {
 }
 
 /* --- 6. MODAL POPUP STYLING --- */
+/* Update class .modal-content */
+.modal-content {
+  /* ... kode lama ... */
+  width: 95%; /* Lebih lebar di HP */
+  margin: 5% auto; /* Margin atas lebih dikit */
+  max-height: 90vh; /* Jangan lebih tinggi dari layar */
+  overflow-y: auto; /* Bisa discroll kalau kepanjangan */
+}
+
+/* Tambahan buat HP */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px; /* Kurangi padding biar muat */
+    margin-top: 20%; /* Turunin dikit biar gak ketabrak kamera */
+  }
+}
 .modal {
   display: none; /* Sembunyi dulu */
   position: fixed;
@@ -573,11 +589,16 @@ body {
   .recentOrders {
     overflow-x: auto;
   }
-}
-@media (max-width: 480px) {
-  .cardBox {
-    grid-template-columns: repeat(1, 1fr);
+  /* Tambahan: Kecilin font tabel di HP */
+  .details table thead td,
+  .details table tbody td {
+    font-size: 12px; /* Biar muat lebih banyak */
+    white-space: nowrap; /* Biar teks gak turun ke baris baru (opsional) */
   }
+}
+/* --- RESPONSIVE UNTUK HP (GANTI BAGIAN INI) --- */
+@media (max-width: 480px) {
+  /* 1. Reset Navigasi Mobile */
   .navigation {
     width: 100%;
     left: -100%;
@@ -589,11 +610,78 @@ body {
   }
   .toggle {
     z-index: 10001;
+    font-size: 2rem; /* Kecilin dikit icon menu */
   }
   .main.active .toggle {
     color: #fff;
     position: fixed;
     right: 0;
     left: initial;
+  }
+
+  /* 2. TOPBAR LOGIC (Biar Muat Semua) */
+  .topbar {
+    padding: 0 10px;
+    gap: 10px; /* Jarak antar elemen */
+  }
+
+  /* Search Bar jadi Fleksibel (Ngisi sisa ruang) */
+  .search {
+    width: auto;
+    flex: 1; /* AJAIB: Ini bikin dia ngambil sisa space yg ada */
+    margin: 0;
+  }
+
+  .search label input {
+    width: 100%;
+    padding: 8px 10px 8px 35px; /* Kurangi padding biar hemat tempat */
+    font-size: 14px; /* Kecilin font input */
+  }
+
+  .search label ion-icon {
+    left: 10px; /* Geser ikon search */
+    font-size: 1.2rem;
+  }
+
+  /* 3. MUNCULIN LAGI USER AREA (PENTING) */
+  .user-area {
+    display: flex; /* WAJIB FLEX BIAR MUNCUL */
+    align-items: center;
+    gap: 10px; /* Jarak notif ke foto */
+  }
+
+  /* Kecilin icon notif di HP */
+  .notification ion-icon {
+    font-size: 1.5rem;
+  }
+
+  /* Kecilin Foto Profil di HP */
+  .user {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* 4. TWEAK KARTU & TABEL */
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr); /* 1 Kartu per baris */
+  }
+  .cardBox .card {
+    padding: 20px; /* Kurangi padding kartu */
+  }
+  .details {
+    padding: 10px; /* Kurangi padding container */
+  }
+
+  /* Tabel Font Kecil */
+  .details table thead td,
+  .details table tbody td {
+    font-size: 12px;
+    padding: 8px 5px;
+  }
+
+  /* Geser tombol aksi biar gak dempet */
+  .details table td button {
+    padding: 4px 8px;
+    font-size: 11px;
   }
 }

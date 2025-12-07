@@ -319,6 +319,25 @@ function setupUI() {
   const toggle = document.querySelector(".toggle");
   const navigation = document.querySelector(".navigation");
   const main = document.querySelector(".main");
+  // Tambahin ini di script.js (Bisa di dalem setupUI)
+
+  // 1. Ambil semua link di sidebar
+  const menuItems = document.querySelectorAll(".navigation ul li a");
+
+  // 2. Loop setiap link
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      // Cek apakah lagi di mode mobile (layar kecil)
+      if (window.innerWidth <= 768) {
+        const navigation = document.querySelector(".navigation");
+        const main = document.querySelector(".main");
+
+        // Tutup Sidebar
+        navigation.classList.remove("active");
+        main.classList.remove("active");
+      }
+    });
+  });
 
   if (toggle) {
     toggle.onclick = function () {
