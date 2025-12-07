@@ -17,6 +17,7 @@
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -69,7 +70,7 @@
               <span class="title">Pengaturan</span>
             </a>
           </li>
-          <li>
+          <li onclick="logoutAdmin()">
             <a href="#">
               <span class="icon"
                 ><ion-icon name="log-out-outline"></ion-icon
@@ -105,7 +106,7 @@
         </div>
 
         <div class="cardBox">
-          <div class="card">
+          <!-- <div class="card">
             <div>
               <div class="numbers">1,504</div>
               <div class="cardName">Total Dilihat</div>
@@ -113,11 +114,11 @@
             <div class="iconBx">
               <ion-icon name="eye-outline"></ion-icon>
             </div>
-          </div>
+          </div> -->
 
           <div class="card">
             <div>
-              <div class="numbers">80</div>
+              <div class="numbers" id="totalTrans">0</div>
               <div class="cardName">Penjualan</div>
             </div>
             <div class="iconBx">
@@ -125,7 +126,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <!-- <div class="card">
             <div>
               <div class="numbers">284</div>
               <div class="cardName">Komentar</div>
@@ -133,11 +134,11 @@
             <div class="iconBx">
               <ion-icon name="chatbubbles-outline"></ion-icon>
             </div>
-          </div>
+          </div> -->
 
           <div class="card">
             <div>
-              <div class="numbers">Rp 30jt</div>
+              <div class="numbers" id="totalDuit">Rp 0</div>
               <div class="cardName">Pemasukan</div>
             </div>
             <div class="iconBx">
@@ -150,7 +151,9 @@
           <div class="recentOrders">
             <div class="cardHeader">
               <h2>Pesanan Terbaru</h2>
-              <a href="#" class="btn">Lihat Semua</a>
+              <button class="btn" onclick="tambahPesananManual()">
+                + Tambah Pesanan
+              </button>
             </div>
 
             <table>
@@ -162,56 +165,13 @@
                   <td>Status</td>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Paket Sayur Asem</td>
-                  <td>Rp 25.000</td>
-                  <td>Lunas</td>
-                  <td><span class="status delivered">Terkirim</span></td>
-                </tr>
-                <tr>
-                  <td>Alpukat Mentega (1kg)</td>
-                  <td>Rp 45.000</td>
-                  <td>Belum</td>
-                  <td><span class="status pending">Proses</span></td>
-                </tr>
-                <tr>
-                  <td>Melon Hidroponik</td>
-                  <td>Rp 65.000</td>
-                  <td>Batal</td>
-                  <td><span class="status return">Retur</span></td>
-                </tr>
-                <tr>
-                  <td>Beras Merah Organik</td>
-                  <td>Rp 90.000</td>
-                  <td>Lunas</td>
-                  <td><span class="status inprogress">Dikemas</span></td>
-                </tr>
-                <tr>
-                  <td>Wagyu Slice (500g)</td>
-                  <td>Rp 180.000</td>
-                  <td>Lunas</td>
-                  <td><span class="status delivered">Terkirim</span></td>
-                </tr>
-                <tr>
-                  <td>Tomat Ceri</td>
-                  <td>Rp 15.000</td>
-                  <td>Belum</td>
-                  <td><span class="status pending">Proses</span></td>
-                </tr>
-                <tr>
-                  <td>Jamur Enoki</td>
-                  <td>Rp 8.000</td>
-                  <td>Lunas</td>
-                  <td><span class="status delivered">Terkirim</span></td>
-                </tr>
-              </tbody>
+              <tbody id="tabel-pesanan"></tbody>
             </table>
           </div>
 
           <div class="recentCustomers">
             <div class="cardHeader">
-              <h2>Sumber Penjualan</h2>
+              <h2>Status Pesanan</h2>
             </div>
             <div class="chartBox">
               <canvas id="myChart"></canvas>
@@ -220,7 +180,51 @@
         </div>
       </div>
     </div>
+    <div id="modalForm" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Tambah Pesanan</h2>
+          <span class="close-btn" onclick="tutupModal()">&times;</span>
+        </div>
 
-    <script src="script.js"></script>
+        <form id="formPesanan" onsubmit="prosesForm(event)">
+          <input type="hidden" id="inputId" />
+
+          <div class="form-group">
+            <label>Nama Produk</label>
+            <input
+              type="text"
+              id="inputNama"
+              required
+              placeholder="Contoh: Pakcoy Organik"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Harga (Rp)</label>
+            <input
+              type="number"
+              id="inputHarga"
+              required
+              placeholder="Contoh: 15000"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Status Pesanan</label>
+            <select id="inputStatus">
+              <option value="pending">Proses (Pending)</option>
+              <option value="inprogress">Dikemas (In Progress)</option>
+              <option value="delivered">Selesai (Delivered)</option>
+              <option value="return">Batal (Return)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-save">Simpan Data</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
   </body>
 </html>
